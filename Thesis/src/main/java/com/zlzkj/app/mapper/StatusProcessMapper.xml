@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlzkj.app.mapper.StatusProcessMapper" >
+  <resultMap id="BaseResultMap" type="com.zlzkj.app.model.StatusProcess" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="thesis_id" property="thesisId" jdbcType="INTEGER" />
+    <result column="result_id" property="resultId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="last_status" property="lastStatus" jdbcType="INTEGER" />
+    <result column="now_status" property="nowStatus" jdbcType="INTEGER" />
+    <result column="add_time" property="addTime" jdbcType="INTEGER" />
+    <result column="is_effective" property="isEffective" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, thesis_id, result_id, user_id, last_status, now_status, add_time, is_effective
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from x_status_process
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from x_status_process
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zlzkj.app.model.StatusProcess" >
+  	<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into x_status_process
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="thesisId != null" >
+        thesis_id,
+      </if>
+      <if test="resultId != null" >
+        result_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="lastStatus != null" >
+        last_status,
+      </if>
+      <if test="nowStatus != null" >
+        now_status,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="isEffective != null" >
+        is_effective,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="thesisId != null" >
+        #{thesisId,jdbcType=INTEGER},
+      </if>
+      <if test="resultId != null" >
+        #{resultId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="lastStatus != null" >
+        #{lastStatus,jdbcType=INTEGER},
+      </if>
+      <if test="nowStatus != null" >
+        #{nowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=INTEGER},
+      </if>
+      <if test="isEffective != null" >
+        #{isEffective,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zlzkj.app.model.StatusProcess" >
+    update x_status_process
+    <set >
+      <if test="thesisId != null" >
+        thesis_id = #{thesisId,jdbcType=INTEGER},
+      </if>
+      <if test="resultId != null" >
+        result_id = #{resultId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="lastStatus != null" >
+        last_status = #{lastStatus,jdbcType=INTEGER},
+      </if>
+      <if test="nowStatus != null" >
+        now_status = #{nowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=INTEGER},
+      </if>
+      <if test="isEffective != null" >
+        is_effective = #{isEffective,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

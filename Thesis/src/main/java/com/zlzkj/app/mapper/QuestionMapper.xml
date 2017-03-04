@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlzkj.app.mapper.QuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.zlzkj.app.model.Question" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="question_title" property="questionTitle" jdbcType="VARCHAR" />
+    <result column="question_content" property="questionContent" jdbcType="VARCHAR" />
+    <result column="question_time" property="questionTime" jdbcType="INTEGER" />
+    <result column="reply" property="reply" jdbcType="VARCHAR" />
+    <result column="is_solved" property="isSolved" jdbcType="INTEGER" />
+    <result column="solved_time" property="solvedTime" jdbcType="INTEGER" />
+    <result column="questioner_id" property="questionerId" jdbcType="INTEGER" />
+    <result column="solveder_id" property="solvederId" jdbcType="INTEGER" />
+    <result column="send_type" property="sendType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, question_title, question_content, question_time, reply, is_solved, solved_time, 
+    questioner_id, solveder_id, send_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from x_question
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from x_question
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zlzkj.app.model.Question" >
+  	<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into x_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="questionTitle != null" >
+        question_title,
+      </if>
+      <if test="questionContent != null" >
+        question_content,
+      </if>
+      <if test="questionTime != null" >
+        question_time,
+      </if>
+      <if test="reply != null" >
+        reply,
+      </if>
+      <if test="isSolved != null" >
+        is_solved,
+      </if>
+      <if test="solvedTime != null" >
+        solved_time,
+      </if>
+      <if test="questionerId != null" >
+        questioner_id,
+      </if>
+      <if test="solvederId != null" >
+        solveder_id,
+      </if>
+      <if test="sendType != null" >
+        send_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="questionTitle != null" >
+        #{questionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="questionContent != null" >
+        #{questionContent,jdbcType=VARCHAR},
+      </if>
+      <if test="questionTime != null" >
+        #{questionTime,jdbcType=INTEGER},
+      </if>
+      <if test="reply != null" >
+        #{reply,jdbcType=VARCHAR},
+      </if>
+      <if test="isSolved != null" >
+        #{isSolved,jdbcType=INTEGER},
+      </if>
+      <if test="solvedTime != null" >
+        #{solvedTime,jdbcType=INTEGER},
+      </if>
+      <if test="questionerId != null" >
+        #{questionerId,jdbcType=INTEGER},
+      </if>
+      <if test="solvederId != null" >
+        #{solvederId,jdbcType=INTEGER},
+      </if>
+      <if test="sendType != null" >
+        #{sendType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zlzkj.app.model.Question" >
+    update x_question
+    <set >
+      <if test="questionTitle != null" >
+        question_title = #{questionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="questionContent != null" >
+        question_content = #{questionContent,jdbcType=VARCHAR},
+      </if>
+      <if test="questionTime != null" >
+        question_time = #{questionTime,jdbcType=INTEGER},
+      </if>
+      <if test="reply != null" >
+        reply = #{reply,jdbcType=VARCHAR},
+      </if>
+      <if test="isSolved != null" >
+        is_solved = #{isSolved,jdbcType=INTEGER},
+      </if>
+      <if test="solvedTime != null" >
+        solved_time = #{solvedTime,jdbcType=INTEGER},
+      </if>
+      <if test="questionerId != null" >
+        questioner_id = #{questionerId,jdbcType=INTEGER},
+      </if>
+      <if test="solvederId != null" >
+        solveder_id = #{solvederId,jdbcType=INTEGER},
+      </if>
+      <if test="sendType != null" >
+        send_type = #{sendType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

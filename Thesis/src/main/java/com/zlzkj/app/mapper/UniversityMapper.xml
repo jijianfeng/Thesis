@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlzkj.app.mapper.UniversityMapper" >
+  <resultMap id="BaseResultMap" type="com.zlzkj.app.model.University" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="university_name" property="universityName" jdbcType="VARCHAR" />
+    <result column="link_man" property="linkMan" jdbcType="VARCHAR" />
+    <result column="link_address" property="linkAddress" jdbcType="VARCHAR" />
+    <result column="link_tel" property="linkTel" jdbcType="VARCHAR" />
+    <result column="is_nine" property="isNine" jdbcType="INTEGER" />
+    <result column="is_two" property="isTwo" jdbcType="INTEGER" />
+    <result column="university_code" property="universityCode" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, area_id, university_name, link_man, link_address, link_tel, is_nine, is_two, 
+    university_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from x_university
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from x_university
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zlzkj.app.model.University" >
+  	<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into x_university
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="universityName != null" >
+        university_name,
+      </if>
+      <if test="linkMan != null" >
+        link_man,
+      </if>
+      <if test="linkAddress != null" >
+        link_address,
+      </if>
+      <if test="linkTel != null" >
+        link_tel,
+      </if>
+      <if test="isNine != null" >
+        is_nine,
+      </if>
+      <if test="isTwo != null" >
+        is_two,
+      </if>
+      <if test="universityCode != null" >
+        university_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="areaId != null" >
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="universityName != null" >
+        #{universityName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkMan != null" >
+        #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="linkAddress != null" >
+        #{linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTel != null" >
+        #{linkTel,jdbcType=VARCHAR},
+      </if>
+      <if test="isNine != null" >
+        #{isNine,jdbcType=INTEGER},
+      </if>
+      <if test="isTwo != null" >
+        #{isTwo,jdbcType=INTEGER},
+      </if>
+      <if test="universityCode != null" >
+        #{universityCode,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zlzkj.app.model.University" >
+    update x_university
+    <set >
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="universityName != null" >
+        university_name = #{universityName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkMan != null" >
+        link_man = #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="linkAddress != null" >
+        link_address = #{linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTel != null" >
+        link_tel = #{linkTel,jdbcType=VARCHAR},
+      </if>
+      <if test="isNine != null" >
+        is_nine = #{isNine,jdbcType=INTEGER},
+      </if>
+      <if test="isTwo != null" >
+        is_two = #{isTwo,jdbcType=INTEGER},
+      </if>
+      <if test="universityCode != null" >
+        university_code = #{universityCode,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

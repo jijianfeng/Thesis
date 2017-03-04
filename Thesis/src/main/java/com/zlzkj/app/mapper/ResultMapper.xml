@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlzkj.app.mapper.ResultMapper" >
+  <resultMap id="BaseResultMap" type="com.zlzkj.app.model.Result" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="thesis_id" property="thesisId" jdbcType="INTEGER" />
+    <result column="send_user_id" property="sendUserId" jdbcType="INTEGER" />
+    <result column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+    <result column="university_id" property="universityId" jdbcType="INTEGER" />
+    <result column="college_id" property="collegeId" jdbcType="INTEGER" />
+    <result column="major_one" property="majorOne" jdbcType="INTEGER" />
+    <result column="major_two" property="majorTwo" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="status_time" property="statusTime" jdbcType="INTEGER" />
+    <result column="attachment" property="attachment" jdbcType="VARCHAR" />
+    <result column="return_time" property="returnTime" jdbcType="INTEGER" />
+    <result column="is_hundred" property="isHundred" jdbcType="INTEGER" />
+    <result column="thesis_result" property="thesisResult" jdbcType="INTEGER" />
+    <result column="thesis_result_one" property="thesisResultOne" jdbcType="INTEGER" />
+    <result column="thesis_result_two" property="thesisResultTwo" jdbcType="INTEGER" />
+    <result column="thesis_result_three" property="thesisResultThree" jdbcType="INTEGER" />
+    <result column="thesis_result_four" property="thesisResultFour" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zlzkj.app.model.Result" extends="BaseResultMap" >
+    <result column="thesis_remark" property="thesisRemark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, thesis_id, send_user_id, teacher_id, university_id, college_id, major_one, major_two, 
+    status, status_time, attachment, return_time, is_hundred, thesis_result, thesis_result_one, 
+    thesis_result_two, thesis_result_three, thesis_result_four
+  </sql>
+  <sql id="Blob_Column_List" >
+    thesis_remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from x_result
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from x_result
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zlzkj.app.model.Result" >
+  	<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into x_result
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="thesisId != null" >
+        thesis_id,
+      </if>
+      <if test="sendUserId != null" >
+        send_user_id,
+      </if>
+      <if test="teacherId != null" >
+        teacher_id,
+      </if>
+      <if test="universityId != null" >
+        university_id,
+      </if>
+      <if test="collegeId != null" >
+        college_id,
+      </if>
+      <if test="majorOne != null" >
+        major_one,
+      </if>
+      <if test="majorTwo != null" >
+        major_two,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="statusTime != null" >
+        status_time,
+      </if>
+      <if test="attachment != null" >
+        attachment,
+      </if>
+      <if test="returnTime != null" >
+        return_time,
+      </if>
+      <if test="isHundred != null" >
+        is_hundred,
+      </if>
+      <if test="thesisResult != null" >
+        thesis_result,
+      </if>
+      <if test="thesisResultOne != null" >
+        thesis_result_one,
+      </if>
+      <if test="thesisResultTwo != null" >
+        thesis_result_two,
+      </if>
+      <if test="thesisResultThree != null" >
+        thesis_result_three,
+      </if>
+      <if test="thesisResultFour != null" >
+        thesis_result_four,
+      </if>
+      <if test="thesisRemark != null" >
+        thesis_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="thesisId != null" >
+        #{thesisId,jdbcType=INTEGER},
+      </if>
+      <if test="sendUserId != null" >
+        #{sendUserId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null" >
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="universityId != null" >
+        #{universityId,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId != null" >
+        #{collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="majorOne != null" >
+        #{majorOne,jdbcType=INTEGER},
+      </if>
+      <if test="majorTwo != null" >
+        #{majorTwo,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="statusTime != null" >
+        #{statusTime,jdbcType=INTEGER},
+      </if>
+      <if test="attachment != null" >
+        #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="returnTime != null" >
+        #{returnTime,jdbcType=INTEGER},
+      </if>
+      <if test="isHundred != null" >
+        #{isHundred,jdbcType=INTEGER},
+      </if>
+      <if test="thesisResult != null" >
+        #{thesisResult,jdbcType=INTEGER},
+      </if>
+      <if test="thesisResultOne != null" >
+        #{thesisResultOne,jdbcType=INTEGER},
+      </if>
+      <if test="thesisResultTwo != null" >
+        #{thesisResultTwo,jdbcType=INTEGER},
+      </if>
+      <if test="thesisResultThree != null" >
+        #{thesisResultThree,jdbcType=INTEGER},
+      </if>
+      <if test="thesisResultFour != null" >
+        #{thesisResultFour,jdbcType=INTEGER},
+      </if>
+      <if test="thesisRemark != null" >
+        #{thesisRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zlzkj.app.model.Result" >
+    update x_result
+    <set >
+      <if test="thesisId != null" >
+        thesis_id = #{thesisId,jdbcType=INTEGER},
+      </if>
+      <if test="sendUserId != null" >
+        send_user_id = #{sendUserId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null" >
+        teacher_id = #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="universityId != null" >
+        university_id = #{universityId,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId != null" >
+        college_id = #{collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="majorOne != null" >
+        major_one = #{majorOne,jdbcType=INTEGER},
+      </if>
+      <if test="majorTwo != null" >
+        major_two = #{majorTwo,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="statusTime != null" >
+        status_time = #{statusTime,jdbcType=INTEGER},
+      </if>
+      <if test="attachment != null" >
+        attachment = #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="returnTime != null" >
+        return_time = #{returnTime,jdbcType=INTEGER},
+      </if>
+      <if test="isHundred != null" >
+        is_hundred = #{isHundred,jdbcType=INTEGER},
+      </if>
+      <if test="thesisResult != null" >
+        thesis_result = #{thesisResult,jdbcType=INTEGER},
+      </if>
+      <if test="thesisResultOne != null" >
+        thesis_result_one = #{thesisResultOne,jdbcType=INTEGER},
+      </if>
+      <if test="thesisResultTwo != null" >
+        thesis_result_two = #{thesisResultTwo,jdbcType=INTEGER},
+      </if>
+      <if test="thesisResultThree != null" >
+        thesis_result_three = #{thesisResultThree,jdbcType=INTEGER},
+      </if>
+      <if test="thesisResultFour != null" >
+        thesis_result_four = #{thesisResultFour,jdbcType=INTEGER},
+      </if>
+      <if test="thesisRemark != null" >
+        thesis_remark = #{thesisRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zlzkj.app.model.Result" >
+    update x_result
+    set thesis_id = #{thesisId,jdbcType=INTEGER},
+      send_user_id = #{sendUserId,jdbcType=INTEGER},
+      teacher_id = #{teacherId,jdbcType=INTEGER},
+      university_id = #{universityId,jdbcType=INTEGER},
+      college_id = #{collegeId,jdbcType=INTEGER},
+      major_one = #{majorOne,jdbcType=INTEGER},
+      major_two = #{majorTwo,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      status_time = #{statusTime,jdbcType=INTEGER},
+      attachment = #{attachment,jdbcType=VARCHAR},
+      return_time = #{returnTime,jdbcType=INTEGER},
+      is_hundred = #{isHundred,jdbcType=INTEGER},
+      thesis_result = #{thesisResult,jdbcType=INTEGER},
+      thesis_result_one = #{thesisResultOne,jdbcType=INTEGER},
+      thesis_result_two = #{thesisResultTwo,jdbcType=INTEGER},
+      thesis_result_three = #{thesisResultThree,jdbcType=INTEGER},
+      thesis_result_four = #{thesisResultFour,jdbcType=INTEGER},
+      thesis_remark = #{thesisRemark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
